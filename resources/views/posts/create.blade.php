@@ -9,11 +9,23 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    @if ($errors->any())
+                        <div class="text-center mb-3">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-red-800 font-bold">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form class="flex flex-col items-center" action="/posts/create" method="post">
                         @csrf
-                        <input class="w-96 mb-3" type="text" name="title" placeholder="title">
-                        <textarea class="w-96 mb-3" name="content" rows="5" placeholder="Insert content"></textarea>
-                        <input class="rounded-md py-1 px-3 bg-green-500 text-white" type="submit" value="Publish now">
+                        <input class="w-96 mb-3" type="text" name="title" value="{{ old('title') }}" placeholder="title">
+                        <textarea class="w-96 mb-3" name="content" rows="5" value="{{ old('content') }}" placeholder="Insert content"></textarea>
+                        <div class="w-96 flex justify-evenly">
+                            <input class="cursor-pointer rounded-md py-1 px-3 bg-green-500 text-white" type="submit" value="Publish now">
+                            <a href="/dashboard" class="cursor-pointer rounded-md py-1 px-3 text-green-500 bg-transparent border-2 border-green-500 text-white">Go back</a>
+                        </div>
                     </form>
                 </div>
             </div>

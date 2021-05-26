@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +21,9 @@ Route::get('/', [\App\Http\Controllers\PostController::class, 'index']);
 Route::get('/post/{post}', [\App\Http\Controllers\PostController::class, 'show']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $posts = Post::where('user_id', Auth::id())->get();
+
+    return view('dashboard', compact('posts'));
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('/posts/create', [\App\Http\Controllers\PostController::class, 'store'])
