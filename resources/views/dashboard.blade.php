@@ -17,11 +17,19 @@
                                 <a href="{{ route('show', ['post' => $post->slug]) }}">{{ $post->title }}</a>
                                 <div>
                                     <a href="{{ route('edit', ['post' => $post->slug]) }}" class="rounded-md bg-blue-500 py-1 px-3 text-white font-bold">Edit</a>
-                                    <a href="/posts/{{ $post->slug }}/delete" class="rounded-md bg-red-500 py-1 px-3 text-white font-bold">Delete</a>
+                                    <a class="rounded-md bg-red-500 py-1 px-3 text-white font-bold cursor-pointer"
+                                       onclick="event.preventDefault();
+                                                this.nextSibling.nextSibling.submit()">
+                                        Delete
+                                    </a>
+                                    <form id="delete" action="{{ route('delete', ['post' => $post->slug]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
-                        <div class=""></div>
                     </div>
                 </div>
             </div>

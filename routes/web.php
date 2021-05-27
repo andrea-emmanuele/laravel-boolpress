@@ -43,4 +43,6 @@ Route::post('/posts/create', [\App\Http\Controllers\PostController::class, 'stor
 Route::put('/posts/{post:slug}/edit', [\App\Http\Controllers\PostController::class, 'update'])
     ->name('update');
 
+Route::delete('/posts/{post:slug}/delete', [\App\Http\Controllers\PostController::class, 'destroy'])->name('delete');
+
 require __DIR__.'/auth.php';
