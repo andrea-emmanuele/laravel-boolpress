@@ -32,18 +32,22 @@
         <div class="container mx-auto p-5">
             <h1 class="text-5xl text-white mb-12 font-bold">Posts</h1>
             <div class="flex flex-col lg:flex-row">
-                @foreach($posts as $post)
-                <div class="relative w-80 rounded shadow bg-white mr-5 pt-6 pb-3">
-                    <h2 class="text-2xl text-center font-bold mb-3">{{ $post->title }}</h2>
-                    <div class="px-3">
-                        <p>{{ $post->content }}</p>
+                @if(count($posts) > 0)
+                    @foreach($posts as $post)
+                    <div class="relative w-80 rounded shadow bg-white mr-5 pt-6 pb-3">
+                        <h2 class="text-2xl text-center font-bold mb-3">{{ $post->title }}</h2>
+                        <div class="px-3">
+                            <p>{{ $post->content }}</p>
+                        </div>
+                        <div class="h-12 flex justify-between items-end">
+                            <p class="2xl:text-sm ml-3 font-bold">Author: <span class="font-normal">{{ $post->author }}</span></p>
+                            <a href="{{ route('show', ['post' => $post->slug]) }}" class="mr-3 text-white bg-green-600 rounded-md py-1 px-3 hover:bg-green-700">View details</a>
+                        </div>
                     </div>
-                    <div class="h-12 flex justify-between items-end">
-                        <p class="2xl:text-sm ml-3 font-bold">Author: <span class="font-normal">{{ $post->author }}</span></p>
-                        <a href="/post/{{$post->id}}" class="mr-3 text-white bg-green-600 rounded-md py-1 px-3 hover:bg-green-700">View details</a>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <p class="text-gray-400 text-xl">No posts founded!</p>
+                @endif
             </div>
         </div>
     </body>

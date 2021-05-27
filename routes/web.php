@@ -15,21 +15,32 @@ use App\Models\Post;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('create');
+
+Route::get('/posts/{post:slug}/edit', [\App\Http\Controllers\PostController::class, 'edit'])
+    ->middleware(['auth'])
+    ->name('edit');
 
 Route::get('/', [\App\Http\Controllers\PostController::class, 'index']);
 
-Route::get('/post/{post}', [\App\Http\Controllers\PostController::class, 'show']);
+Route::get('/posts/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])
+    ->name('show');
 
 Route::get('/dashboard', function () {
     $posts = Post::where('user_id', Auth::id())->get();
 
     return view('dashboard', compact('posts'));
-})->middleware(['auth'])->name('dashboard');
+})
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::post('/posts/create', [\App\Http\Controllers\PostController::class, 'store'])
-    ->middleware('auth')->name('dashboard');
+    ->middleware('auth')
+    ->name('store');
 
-Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])
-    ->middleware(['auth'])->name('dashboard');
+Route::put('/posts/{post:slug}/edit', [\App\Http\Controllers\PostController::class, 'update'])
+    ->name('update');
 
 require __DIR__.'/auth.php';
