@@ -30,7 +30,7 @@
     </div>
 @endif
 <div class="container mx-auto p-5">
-    <h1 class="text-5xl text-white mb-2 font-bold">{{ $category->name }}</h1>
+    <h1 class="text-5xl text-white mb-6 font-bold">{{ $category->name }}</h1>
 
     <div class="flex">
         @foreach($category->post as $post)
