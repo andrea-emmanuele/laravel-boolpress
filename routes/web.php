@@ -15,7 +15,7 @@ use App\Models\Post;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])
+Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create', \App\Http\Controllers\PostController::class, 'show'])
     ->middleware(['auth'])
     ->name('create');
 

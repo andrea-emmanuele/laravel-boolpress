@@ -21,6 +21,14 @@
                     <form class="flex flex-col items-center" action="{{ route('store') }}" method="post">
                         @csrf
                         <input class="w-96 mb-3" type="text" name="title" value="{{ old('title') }}" placeholder="title">
+                        <select class="w-96 mb-3" name="category">
+                            @if(count($categories) === 0)
+                                <option value="">No categories</option>
+                            @endif
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                         <textarea class="w-96 mb-3" name="content" rows="5" value="{{ old('content') }}" placeholder="Insert content"></textarea>
                         <div class="w-96 flex justify-evenly">
                             <input class="cursor-pointer rounded-md py-1 px-3 bg-green-500 text-white" type="submit" value="Publish now">
