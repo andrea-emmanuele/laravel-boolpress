@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 200);
             $table->longText('content');
             $table->string('author', 80);
-            $table->integer('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

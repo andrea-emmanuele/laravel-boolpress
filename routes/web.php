@@ -30,7 +30,7 @@ Route::get('/posts/{post:slug}', [\App\Http\Controllers\PostController::class, '
     ->name('show');
 
 Route::get('/dashboard', function () {
-    $posts = Post::where('user_id', Auth::id())->get();
+    $posts = Post::with('user')->get();
 
     return view('dashboard', compact('posts'));
 })
