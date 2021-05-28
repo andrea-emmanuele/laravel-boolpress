@@ -15,25 +15,25 @@
         }
     </style>
 </head>
-<body class="bg-gradient-to-r from-gray-700 to-gray-600">
+<body class="bg-gray-100">
 @if (Route::has('login'))
     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
         @auth
-            <a href="{{ url('/dashboard') }}" class="text-sm text-white underline">Dashboard</a>
+            <a href="{{ url('/dashboard') }}" class="text-sm underline">Dashboard</a>
         @else
-            <a href="{{ route('login') }}" class="text-sm text-white underline">Log in</a>
+            <a href="{{ route('login') }}" class="text-sm underline">Log in</a>
 
             @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-white underline">Register</a>
+                <a href="{{ route('register') }}" class="ml-4 text-sm underline">Register</a>
             @endif
         @endauth
     </div>
 @endif
-<div class="container mx-auto p-5 text-white">
+<div class="container mx-auto p-5">
     <img class="w-1/3 h-80 object-cover object-center rounded-lg mb-3" src="{{asset('storage/' . $post->thumb)}}">
     <h1 class="text-5xl mb-2 font-bold">{{ $post->title }}</h1>
-    <span>Category: </span><a class="inline-block text-green-600 mb-8" href="{{ route('showCategory', ['category' => $post->category->slug]) }}">{{ $post->category->name }}</a>
-    <p class="mb-10">{{ $post->content }}</p>
+    <span>Category: </span><a class="inline-block text-blue-800 mb-8" href="{{ route('showCategory', ['category' => $post->category->slug]) }}">{{ $post->category->name }}</a>
+    <p class="text-gray-400 mb-10">{{ $post->content }}</p>
     <p>Written by: <span>{{ $post->author }}</span></p>
     <p>Published at: <span>{{ $post->created_at }}</span></p>
 </div>

@@ -15,22 +15,22 @@
             }
         </style>
     </head>
-    <body class="bg-gradient-to-r from-gray-700 to-gray-600">
+    <body class="bg-gray-100">
         @if (Route::has('login'))
             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-sm text-white underline">Dashboard</a>
+                    <a href="{{ url('/dashboard') }}" class="text-sm underline">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-white underline">Log in</a>
+                    <a href="{{ route('login') }}" class="text-sm underline">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-white underline">Register</a>
+                        <a href="{{ route('register') }}" class="ml-4 text-sm underline">Register</a>
                     @endif
                 @endauth
             </div>
         @endif
         <div class="container mx-auto p-5">
-            <h1 class="text-5xl text-white mb-12 font-bold">Posts</h1>
+            <h1 class="text-5xl mb-12 font-bold">Posts</h1>
             <div class="flex flex-col lg:flex-row">
                 @if(count($posts) > 0)
                     @foreach($posts as $post)
