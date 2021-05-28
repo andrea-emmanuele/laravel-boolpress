@@ -35,7 +35,7 @@
                 @if(count($posts) > 0)
                     @foreach($posts as $post)
                     <div class="relative w-80 rounded shadow bg-white mr-5 pb-3 overflow-hidden">
-                        <img class="w-full h-44 object-cover mb-4" src="{{asset($post->thumb)}}">
+                        <img class="w-full h-44 object-cover mb-4" src="{{asset('storage/' . $post->thumb)}}">
                         <h2 class="text-2xl text-center font-bold mb-3">{{ $post->title }}</h2>
                         <div class="px-3">
                             <p>{{ $post->content }}</p>

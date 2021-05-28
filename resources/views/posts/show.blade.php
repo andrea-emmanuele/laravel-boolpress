@@ -30,7 +30,7 @@
     </div>
 @endif
 <div class="container mx-auto p-5 text-white">
-    <img class="w-1/3 h-80 object-cover object-center rounded-lg mb-3" src="{{asset($post->thumb)}}">
+    <img class="w-1/3 h-80 object-cover object-center rounded-lg mb-3" src="{{asset('storage/' . $post->thumb)}}">
     <h1 class="text-5xl mb-2 font-bold">{{ $post->title }}</h1>
     <span>Category: </span><a class="inline-block text-green-600 mb-8" href="{{ route('showCategory', ['category' => $post->category->slug]) }}">{{ $post->category->name }}</a>
     <p class="mb-10">{{ $post->content }}</p>
