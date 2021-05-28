@@ -24,6 +24,8 @@
                         <select class="w-96 mb-3" name="category">
                             @if(count($categories) === 0)
                                 <option value="">No categories</option>
+                            @else
+                                <option value="" selected disabled>Choose one category</option>
                             @endif
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>

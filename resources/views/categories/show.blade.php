@@ -29,12 +29,24 @@
         @endauth
     </div>
 @endif
-<div class="container mx-auto p-5 text-white">
-    <h1 class="text-5xl mb-2 font-bold">{{ $post->title }}</h1>
-    <span>Category: </span><a class="inline-block text-green-600 mb-8" href="{{ route('showCategory', ['category' => $post->category->slug]) }}">{{ $post->category->name }}</a>
-    <p class="mb-10">{{ $post->content }}</p>
-    <p>Written by: <span>{{ $post->author }}</span></p>
-    <p>Published at: <span>{{ $post->created_at }}</span></p>
+<div class="container mx-auto p-5">
+    <h1 class="text-5xl text-white mb-2 font-bold">{{ $category->name }}</h1>
+
+    <div class="flex">
+        @foreach($category->post as $post)
+            <div class="relative w-80 rounded shadow bg-white mr-5 pt-6 pb-3">
+                <h2 class="text-2xl text-center font-bold mb-3">{{ $post->title }}</h2>
+                <div class="px-3">
+                    <p>{{ $post->content }}</p>
+                </div>
+                <div class="h-12 flex justify-between items-end">
+                    <p class="2xl:text-sm ml-3 font-bold">Author: <span class="font-normal">{{ $post->author }}</span></p>
+                    <a href="{{ route('show', ['post' => $post->slug]) }}" class="mr-3 text-white bg-green-600 rounded-md py-1 px-3 hover:bg-green-700">View details</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 </div>
 </body>
 </html>

@@ -15,15 +15,16 @@ use App\Models\Post;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create', \App\Http\Controllers\PostController::class, 'show'])
+Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
+
+/*posts */
+Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])
     ->middleware(['auth'])
     ->name('create');
 
 Route::get('/posts/{post:slug}/edit', [\App\Http\Controllers\PostController::class, 'edit'])
     ->middleware(['auth'])
     ->name('edit');
-
-Route::get('/', [\App\Http\Controllers\PostController::class, 'index']);
 
 Route::get('/posts/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])
     ->name('show');
@@ -44,5 +45,33 @@ Route::put('/posts/{post:slug}/edit', [\App\Http\Controllers\PostController::cla
     ->name('update');
 
 Route::delete('/posts/{post:slug}/delete', [\App\Http\Controllers\PostController::class, 'destroy'])->name('delete');
+
+/* categories */
+Route::get('/categories/create', [\App\Http\Controllers\CategoryController::class, 'create'])
+    ->middleware('auth')
+    ->name('addCategory');
+
+Route::delete('/categories/{category:slug}/delete', [\App\Http\Controllers\CategoryController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('deleteCategory');
+
+Route::put('/categories/{category:slug}/edit', [\App\Http\Controllers\CategoryController::class, 'update'])
+    ->middleware('auth')
+    ->name('updateCategory');
+
+Route::get('/categories', [\App\Http\Controllers\CategoryController::class, 'index'])
+    ->middleware('auth')
+    ->name('allCategories');
+
+Route::get('/categories/{category:slug}', [\App\Http\Controllers\CategoryController::class, 'show'])
+    ->name('showCategory');
+
+Route::get('/categories/{category:slug}/edit', [\App\Http\Controllers\CategoryController::class, 'edit'])
+    ->middleware('auth')
+    ->name('editCategory');
+
+Route::post('/categories', [\App\Http\Controllers\CategoryController::class, 'store'])
+    ->middleware('auth')
+    ->name('storeCategory');
 
 require __DIR__.'/auth.php';

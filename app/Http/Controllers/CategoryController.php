@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
 
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $slug = preg_replace("/[\s]/", "-", $request->name);
+        $slug = strtolower($slug);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->save();
+
+        return redirect()->route('allCategories');
     }
 
     /**
@@ -46,7 +60,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show', compact('category'));
     }
 
     /**
@@ -57,7 +71,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -69,7 +83,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $slug = preg_replace("/[\s]/", "-", $request->name);
+        $slug = strtolower($slug);
+
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->save();
+
+        return redirect()->route('allCategories', ['edit-success']);
     }
 
     /**
@@ -80,6 +101,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('allCategories', ['delete-success']);
     }
 }

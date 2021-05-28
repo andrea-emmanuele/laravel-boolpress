@@ -22,6 +22,16 @@
                         @csrf
                         @method('PUT')
                         <input class="w-96 mb-3" type="text" name="title" value="{{ $post->title }}" placeholder="title">
+                        <select class="w-96 mb-3" name="category">
+                            @if(count($categories) === 0)
+                                <option value="">No categories</option>
+                            @else
+                                <option value="" selected disabled>Choose one category</option>
+                            @endif
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ ($category->id === $post->category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                         <textarea class="w-96 mb-3" name="content" rows="5" placeholder="Insert content">{{ $post->content }}</textarea>
                         <div class="w-96 flex justify-evenly">
                             <input class="cursor-pointer rounded-md py-1 px-3 bg-green-500 text-white" type="submit" value="Publish now">
