@@ -18,7 +18,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form class="flex flex-col items-center" action="{{ route('update', ['post' => $post->slug]) }}" method="post">
+                    <form class="flex flex-col items-center" action="{{ route('update', ['post' => $post->slug]) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <input class="w-96 mb-3" type="text" name="title" value="{{ $post->title }}" placeholder="title">
@@ -33,6 +33,7 @@
                             @endforeach
                         </select>
                         <textarea class="w-96 mb-3" name="content" rows="5" placeholder="Insert content">{{ $post->content }}</textarea>
+                        <input class="mb-6" type="file" name="thumb">
                         <div class="w-96 flex justify-evenly">
                             <input class="cursor-pointer rounded-md py-1 px-3 bg-green-500 text-white" type="submit" value="Publish now">
                             <a href="/dashboard" class="cursor-pointer rounded-md py-1 px-3 text-green-500 bg-transparent border-2 border-green-500 text-white">Go back</a>
